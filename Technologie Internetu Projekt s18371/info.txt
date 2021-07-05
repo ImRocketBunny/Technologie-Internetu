@@ -1,0 +1,9 @@
+podejscie nr1 mysql2
+
+1. instalujrmy oprogramowania MySql oraz uruchamiamy usluge MySql80.
+2. Uruchamiamy serwer za pomoca doatarcznonych hasel uzytkownika.
+3. Ururhcamiamy skrypt naszej bazy "tin-projekt-kruk-s18371.dql" za pomoca Mysql Workbench 8.0. Tworzy on baze danych oraz uzupelnia go o kilkoma wartosciami;
+4. Uruchamiamy Powershell i jako sciezke ustawiamy wyoakowany wczesniej folder "tin-projekt-kruk-s18371".
+5. wpisujemy polecenie "npm start" i potwierdzamy enterem.
+6  Jezeli wynikiem jest zielony tekst inicjujacy na konsoli calosc jest gotowa do dzialania;
+7. Po wpisaniu localhost:3000 w adresie przegladarki powinna zaladowac sie strona glówna projektu.

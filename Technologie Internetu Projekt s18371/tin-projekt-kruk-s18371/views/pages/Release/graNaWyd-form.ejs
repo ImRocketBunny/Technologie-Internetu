@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <script type="application/javascript" src="../../js/validationCommon.js"></script>
+    <script type="application/javascript" src="../../js/validationReleaseForm.js"></script>
+    <link rel="stylesheet" href="../../css/release/styleForm.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Baza Gier</title>
+</head>
+    <body >
+        
+        <header>
+            <h1 >Baza Gier CFA</h1>
+            <img src="../../img/logo.png" alt="Baza Gier CFA Logo">
+        </header>
+        <nav >
+            <ul>
+                <li><a href="/">Strona główna</a></li>
+                <li><a href="/game">Gry</a></li>
+                <li><a href="/platform">Platformy</a></li>
+                <li><a href="/release" class="active">Wydania</a></li>
+            </ul>
+        </nav>
+        <main>
+            <script type="application/javascript" src="/js/validationReleaseForm.js"></script>
+            <h2><%= pageTitle %></h2>
+            <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm()">
+                <input type="hidden" name="idWydania" value="<%= release.idWydania %>">
+                <!--<div class="form-group">-->
+                    <label for="gra">Gra:<abbr title="required" aria-label="required">*</abbr></label>
+                   <% if (!(Object.keys(validationErrors).length === 0)) { %>   
+                        <select name="gra" id="gra" required <%= (formMode == 'showDetails') ? 'disabled' : ''%>>
+                            <option value="" selected hidden> ---Wybierz grę---</option>
+                            <% for (let i=0; i<allGames.length; i++) { let gra = allGames[i]; %>
+                                <option value="<%= gra.idGry %>" label="<%= gra.nazwaG + ' ' + gra.edycja %>"
+                                    <%= (gra.idGry.toString() == releaseData.gra.toString()) ? 'selected' : ''%>></option>
+                            <% } %>
+                          </select>
+                        <% } else{ %>  
+                            <select name="gra" id="gra" required <%= (formMode == 'showDetails') ? 'disabled' : ''%>>
+                                <option value="" selected hidden> ---Wybierz grę---</option>
+                                <% for (let i=0; i<allGames.length; i++) { let gra = allGames[i]; %>
+                                    <option value="<%= gra.idGry %>" label="<%= gra.nazwaG + ' ' + gra.edycja %>"
+                                        <%= (release.idWydania && gra.idGry.toString() == release.gra.idGry.toString()) ? 'selected' : ''%>></option>
+                                <% } %>
+                              </select>
+                    <% } %>
+                      <span id="errorGra" class="errors-text">
+                        <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                            <% if (validationErrors.find(e => e.path.includes('gra'))) { %>
+                                <%= validationErrors.find(e => e.path.includes('gra')).message %>
+                            <% } %>
+                        <% } %>
+                      </span>
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <label for="platforma">Platforma:<abbr title="required" aria-label="required">*</abbr></label>
+                    <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                    <select  name="platforma" id="platforma" required <%= (formMode == 'showDetails') ? 'disabled' : ''%>> 
+                        <% for (let i=0; i<allPlatforms.length; i++) { let platforma = allPlatforms[i]; %>
+                
+                            <option value="<%= platforma.idPlatformy %>" label="<%= platforma.nazwa %>"
+                                <%= (platforma.idPlatformy.toString() == releaseData.platforma.toString()) ? 'selected' : ''%>></option>
+                        <% } %>
+                      </select>
+                      <% } else{ %>
+                        <select  name="platforma" id="platforma" required <%= (formMode == 'showDetails') ? 'disabled' : ''%>>
+                        <option value="" selected hidden> ---Wybierz platformę--</option> 
+                        <% for (let i=0; i<allPlatforms.length; i++) { let platforma = allPlatforms[i]; %>
+                            <option value="<%= platforma.idPlatformy %>" label="<%= platforma.nazwa %>"
+                                <%= (release.idWydania && platforma.idPlatformy.toString() == release.platforma.idPlatformy.toString()) ? 'selected' : ''%>></option>
+                        <% } %>
+                      </select>
+                    <% } %>
+                      <span id="errorPlatforma" class="errors-text">
+                        <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                            <% if (validationErrors.find(e => e.path.includes('platforma'))) { %>
+                                <%= validationErrors.find(e => e.path.includes('platforma')).message %>
+                            <% } %>
+                        <% } %>
+                      </span>
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <label for="releaseDate">Data Premiery:<abbr title="required" aria-label="required">*</abbr></label>
+                    <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                    
+                        <input type="date" name="releaseDate" id="releaseDate" value="<%= releaseData.releaseDate %>"
+                        <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                        <% } else{ %>  
+                            <input type="date" name="releaseDate" id="releaseDate" value="<%= release.releaseDate ? release.releaseDate.toISOString().split('T')[0] : release.releaseDate %>"
+                            <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                    <% } %>
+                    <span id="errorDate" class="errors-text">
+                        <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                            <% if (validationErrors.find(e => e.path.includes('releaseDate'))) { %>
+                                <%= validationErrors.find(e => e.path.includes('releaseDate')).message %>
+                            <% } %>
+                        <% } %>
+                    </span>
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <label for="price">Cena:<abbr title="required" aria-label="required">*</abbr></label>
+                    <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                        <input type="number" name="price" id="price" placeholder="liczba" value="<%= releaseData.price %>"
+                        <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                        <% } else{ %>  
+                            <input type="number" name="price" id="price" placeholder="liczba" value="<%= release.price %>"
+                            <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                    <% } %>
+                    <span id="errorPrice" class="errors-text">
+                        <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                            <% if (validationErrors.find(e => e.path.includes('price'))) { %>
+                                <%= validationErrors.find(e => e.path.includes('price')).message %>
+                            <% } %>
+                        <% } %>
+                    </span>
+                    
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <label for="version">Wersja:<abbr title="required" aria-label="required">*</abbr></label>
+                    <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                        <input type="number" name="version" id="version" placeholder="liczba" value="<%= releaseData.version %>"
+                        <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                        <% } else{ %>  
+                            <input type="number" name="version" id="version" placeholder="liczba" value="<%= release.version %>"
+                            <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                    <% } %>
+                    <span id="errorVersion" class="errors-text">
+                        <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                            <% if (validationErrors.find(e => e.path.includes('version'))) { %>
+                                <%= validationErrors.find(e => e.path.includes('version')).message %>
+                            <% } %>
+                        <% } %>
+                    </span>
+                <!--</div>-->
+                <div class="form-buttons">
+                    <% if (formMode == 'showDetails') { %>
+                        <div class="section-buttons">
+                            <a href="/release/edit/<%= release.idWydania %>" class="form-button-submit">Edytuj</a>
+                        </div>
+                        <% } %>
+                    <p id="errorsSummary" class="errors-text"></p>
+                    <% if (formMode != 'showDetails') { %>
+                        <input class="form-button-submit" type="submit" value="<%=btnLabel%>" />
+                        <a class="form-button-cancel" href="/release">Anuluj</a>
+                    <% } else { %>
+                        <a class="form-button-cancel" href="/release">Powrót</a>
+                    <% } %>
+                </div> 
+                <p><b></b><b></b></p>
+            </form>
+            
+            
+        </main>
+        <%- include('../../fragments/footer.ejs') %>

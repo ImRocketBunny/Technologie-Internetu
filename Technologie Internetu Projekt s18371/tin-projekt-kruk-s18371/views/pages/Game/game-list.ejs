@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <link rel="stylesheet" href="../../css/game/styleList.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Baza Gier</title>
+</head>
+    <body>
+        
+        <header>
+            <h1>Baza Gier CFA</h1>
+            <img src="../../img/logo.png" alt="Baza Gier CFA Logo">
+        </header>
+        <nav>
+            <ul>
+                <li><a href="/">Strona główna</a></li>
+                <li><a href="" class="active">Gry</a></li>
+                <li><a href="/platform">Platformy</a></li>
+                <li><a href="/release">Wydania</a></li>
+            </ul>
+        </nav>
+        <main>
+            <h2>Lista gier</h2>
+            <table class="table-list">
+                <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Gatunek</th>
+                        <th>Edycja</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let game of games) { %>
+                    <tr>
+                        <td><%= game.nazwaG %></td>
+                        <td><%= game.gatunek %></td>
+                        <td><%= game.edycja %></td>
+                        <td>
+                            <ul class="list-actions">
+                                <li>
+                                    <a href="/game/details/<%=game.idGry%>" class="list-actions-button-details">Szczegóły</a>
+                                </li>
+                                <li>
+                                    <a href="/game/edit/<%=game.idGry%>" class="list-actions-button-edit">Edytuj</a>
+                                </li>
+                                <li>
+                                    <a href="/game/delete/<%=game.idGry%>" class="list-actions-button-delete">Usuń</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <% } %>
+                    <!-- Tu wstaw dodatkowe wiersze -->
+                </tbody>
+            </table>
+            <p><a href="game/add" class="button-add">Dodaj nową grę</a></p>
+            <p><br/></p>
+        </main>
+        <%- include('../../fragments/footer.ejs') %>

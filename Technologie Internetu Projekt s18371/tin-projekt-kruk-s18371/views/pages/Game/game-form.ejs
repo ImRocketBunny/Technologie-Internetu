@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <script type="application/javascript" src="../../js/validationCommon.js"></script>
+    <script type="application/javascript" src="../../js/validationGameForm.js"></script>
+    <link rel="stylesheet" href="../../css/game/styleForm.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Baza Gier</title>
+</head>
+    <body >
+      
+        <header>
+            <h1 >Baza Gier CFA</h1>
+            <img src="../../img/logo.png" alt="Baza Gier CFA Logo">
+        </header>
+        <nav >
+            <ul>
+                <li><a href="/">Strona główna</a></li>
+                <li><a href="/game" class="active">Gry</a></li>
+                <li><a href="/platform">Platformy</a></li>
+                <li><a href="/release">Wydania</a></li>
+            </ul>
+        </nav>
+        <main>
+            <script type="application/javascript" src="../../js/validationGameForm.js"></script>
+            <h2><%= pageTitle %></h2>
+            <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm()">
+                    <input type="hidden" name="idGry" value="<%= game.idGry %>">
+
+
+
+                    
+                <!--<div class="form-group">-->
+                    <label for="nazwa">Tytuł:<abbr title="required" aria-label="required">*</abbr></label>					
+                    <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                    
+                        <input class="<%= validationErrors.find(e => e.path.includes('nazwa')) ? 'error-input' : '' %>" type="text" name="nazwa" id="title" placeholder="2-60 znaków" value="<%= gameData.nazwa %>"
+                        <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                        <% } else{ %>  
+                        <input type="text" name="nazwa" id="title" placeholder="2-60 znaków" value="<%= game.name %>"
+                        <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                    <% } %>
+
+
+
+                    <span id="errorTitle" class="errors-text">
+                        <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                            <% if (validationErrors.find(e => e.path.includes('nazwa'))) { %>
+                                <%= validationErrors.find(e => e.path.includes('nazwa')).message %>
+                            <% } %>
+                        <% } %>
+                    </span>
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <label for="gatunek">Gatunek:<abbr title="required" aria-label="required">*</abbr></label>
+                    <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                    
+                        <input class="<%= validationErrors.find(e => e.path.includes('gatunek')) ? 'error-input' : '' %>" type="text" name="gatunek" id="category" placeholder="2-60 znaków" value="<%= gameData.gatunek %>"
+                        <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                        <% } else{ %>  
+                        <input type="text" name="gatunek" id="category" placeholder="2-60 znaków" value="<%= game.category %>"
+                        <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                    <% } %>
+                    <!-- <input type="text" name="gatunek" id="category" placeholder="2-60 znaków" value="<%= game.category %>"
+                    <%= (formMode == 'showDetails') ? 'disabled' : '' %> />-->
+                    <span id="errorCategory" class="errors-text">
+                        <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                            <% if (validationErrors.find(e => e.path.includes('gatunek'))) { %>
+                                <%= validationErrors.find(e => e.path.includes('gatunek')).message %>
+                            <% } %>
+                        <% } %>
+                    </span>
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <label for="edycja">Edycja:<abbr title="required" aria-label="required">*</abbr></label>
+                    <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                    
+                        <input class="<%= validationErrors.find(e => e.path.includes('edycja')) ? 'error-input' : '' %>" type="text" name="edycja" id="edition" placeholder="2-60 znaków" value="<%= gameData.edycja %>"
+                        <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                        <% } else{ %>  
+                        <input type="text" name="edycja" id="edition" placeholder="2-60 znaków" value="<%= game.edition %>"
+                        <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                    <% } %>
+                    <!--<input type="text" name="edycja" id="edition" placeholder="2-60 znaków" value="<%= game.edition %>"
+                    <%= (formMode == 'showDetails') ? 'disabled' : '' %> />-->
+                    <span id="errorEdition" class="errors-text">
+                        <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                            <% if (validationErrors.find(e => e.path.includes('edycja'))) { %>
+                                <%= validationErrors.find(e => e.path.includes('edycja')).message %>
+                            <% } %>
+                        <% } %>
+                    </span>
+                <!--</div>-->
+                <div class="form-buttons">
+                    <% if (formMode == 'showDetails') { %>
+                        <a href="/game/edit/<%= game.idGry %>" class="form-button-submit">Edytuj</a>
+                    <% } %>
+                    <p id="errorsSummary" class="errors-text"></p>
+                    <% if (formMode != 'showDetails') { %>
+                        <input class="form-button-submit" type="submit" value="<%=btnLabel%>" />
+                        <a class="form-button-cancel" href="/game">Anuluj</a>
+                    <% } else { %>
+                        <a class="form-button-cancel" href="/game">Powrót</a>
+                    <% } %>
+                </div>
+                <p><b></b></p>
+            </form>
+            <% if (formMode == 'showDetails' || formMode == 'edit') { %>
+                <h2>
+                    Szczegóły wydania
+                </h2>
+                <table class="table-list">
+                    <thead>
+                    <tr>
+                        <th>Platforma</th>
+                        <th>Cena</th>
+                        <th>Data wydania</th>
+                        <th>Wersja</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <% for (let e of game.releases) { %>
+                            <tr>
+                                <td><a href="/platform/details/<%= e.platforma.idPlatformy %>"><%= e.platforma.name %></a></td>
+                                <td><%= e.price %></td>
+                                <td><%= e.releaseDate.toISOString().split('T')[0] %></td>
+                                <td><%= e.version %></td>
+                            </tr> 
+                        <% } %>
+                    </tbody>
+                </table>
+                <p><b></b></p>
+            <% } %>
+            <p><b></b></p>
+            <p><b></b></p>
+            <p><b></b></p>
+            <p><b></b></p>
+        
+        </main>
+        <%- include('../../fragments/footer.ejs') %>

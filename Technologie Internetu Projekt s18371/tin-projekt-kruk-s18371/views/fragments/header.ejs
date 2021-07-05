@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <link rel="stylesheet" href="css/ultimateCss.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Baza Gier</title>
+</head>
+    <body>
+        
+        <header>
+            <h1 >Baza Gier CFA</h1>
+            <img src="img/logo.png" alt="Baza Gier CFA Logo">
+        </header>
+        <nav>
+            <ul>
+                <li><a href="" class="<%= navLocation == 'main' ? 'active' : ''%>">Strona główna</a></li>
+                <li><a href="/game" class="<%= navLocation == 'game' ? 'active' : ''%>">Gry</a></li>
+                <li><a href="/platform" class="<%= navLocation == 'platform' ? 'active' : ''%>">Platformy</a></li>
+                <li><a href="/release" class="<%= navLocation == 'release' ? 'active' : ''%>">Wydania</a></li>
+            </ul>
+        </nav>

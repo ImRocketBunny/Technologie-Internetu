@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <link rel="stylesheet" href="../../css/platform/styleDetail.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Baza Gier</title>
+</head>
+    <body>
+      
+        <header>
+            <h1>Baza Gier CFA</h1>
+            <img src="../../img/logo.png" alt="Baza Gier CFA Logo">
+        </header>
+        <nav>
+            <ul>
+                <li><a href="../../index.html">Strona główna</a></li>
+                <li><a href="../Game/game-list.html">Gry</a></li>
+                <li><a href="" class="active">Platformy</a></li>
+                <li><a href="../Release/graNaWyd-list.html">Gry na platformy</a></li>
+            </ul>
+        </nav>
+        <main>
+            <h2 >Szczegóły platofrmy</h2>
+            <form class="form">
+                <!--<div class="form-group">-->
+                    <label for="name">Nazwa:<sup>*</sup></label>
+                    <input type="text" name="name" id="name" value="PlayStstion 4" disabled />
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <label for="producer">Producent:<sup>*</sup></label>
+                    <input type="text" name="producer" id="producer" value="Sony" disabled />
+                <!--</div>-->
+                <div class="form-button">
+                    <a href="platform-edit.html" class="button-cancel">Edytuj</a>    
+                </div> 
+            </form>
+            <h2 >Wydania</h2>
+            <table class="table-list">
+                <thead>
+                    <tr>
+                        <th>Tytuł</th>
+                        <th>Gatunek</th>
+                        <th>Edycja</th>
+                        <th>Data premiery</th>
+                        <th>Cena</th>
+                        <th>Wersja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Call of Duty: Black Ops Cold War</td>
+                        <td>FPS</td>
+                        <td>Standard</td>
+                        <td>2020-10-20</td>
+                        <td>280.00</td>
+                        <td>1.1</td>
+                    </tr>
+                    <tr>
+                        <td>Call of Duty: Black Ops Cold War</td>
+                        <td>FPS</td>
+                        <td>Digital Deluxe</td>
+                        <td>2020-10-20</td>
+                        <td>320.00</td>
+                        <td>1.2</td>
+                         
+                    </tr>
+                    <tr>
+                        <td>Battlefield 4</td>
+                        <td>FPS</td>
+                        <td>Game of the Year</td>
+                        <td>2013-10-31</td>
+                        <td>240.00</td>
+                        <td>1.0</td>
+                         
+                    </tr>
+                    <!-- Tu wstaw dodatkowe wiersze -->
+                </tbody>
+               
+            </table>
+            <p><br></p>
+            <div>
+                <a href="platform-list.html" class="button-back">Powrót</a>
+            </div>
+            <p><br></p>
+        </main>
+        <%- include('../../fragments/footer.ejs') %>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <script type="application/javascript" src="../../js/validationCommon.js"></script>
+    <script type="application/javascript" src="../../js/validationReleaseForm.js"></script>
+    <link rel="stylesheet" href="../../css/release/styleForm.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Baza Gier</title>
+</head>
+    <body >
+        
+        <header>
+            <h1 >Baza Gier CFA</h1>
+            <img src="../../img/logo.png" alt="Baza Gier CFA Logo">
+        </header>
+        <nav >
+            <ul>
+                <li><a href="../../index.html">Strona główna</a></li>
+                <li><a href="../Game/game-list.html">Gry</a></li>
+                <li><a href="../Platform/platform-list.html">Platformy</a></li>
+                <li><a href="" class="active">Wydania</a></li>
+            </ul>
+        </nav>
+        <main>
+            <h2>Nowe Wydanie</h2>
+            <form class="form" novalidate onsubmit="return validateForm()">
+                <!--<div class="form-group">-->
+                    <label for="gra">Gra:<abbr title="required" aria-label="required">*</abbr></label>
+                    <select name="gra" id="gra" value="Call of Duty: Black Ops Cold War standard">
+                        <option value="Call of Duty: Black Ops Cold War standard">Call of Duty: Black Ops Cold War standard</option>
+                        <option value="Call of Duty: Black Ops Cold War Digital Deluxe">Call of Duty: Black Ops Cold War Digital Deluxe</option>
+                      </select>
+                      <span id="errorGra" class="errors-text"></span>
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <label for="platforma">Platforma:<abbr title="required" aria-label="required">*</abbr></label>
+                    <select name="platforma" id="platforma" value="PlayStation 4">
+                        <option value="PlayStation 4">PlayStation 4</option>
+                        <option value="PlayStation 5">PlayStation 5</option>
+                        <option value="PC Windows 7">PC Windows 7</option>
+                        <option value="PC Windows 10">PC Windows 10</option>
+                      </select>
+                      <span id="errorPlatforma" class="errors-text"></span>
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <label for="releaseDate">Data Premiery:<abbr title="required" aria-label="required">*</abbr></label>
+                    <input type="date" name="releaseDate" id="releaseDate" value="2020-10-20"/>
+                    <span id="errorDate" class="errors-text"></span>
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <label for="price">Cena:<abbr title="required" aria-label="required">*</abbr></label>
+                    <input type="number" name="price" id="price"  value="280.00"/>
+                    <span id="errorPrice" class="errors-text"></span>
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <label for="version">Wersja:<abbr title="required" aria-label="required">*</abbr></label>
+                    <input type="number" name="version" id="version" value="1.0" />
+                    <span id="errorVersion" class="errors-text"></span>
+                <!--</div>-->
+                <div class="form-buttons">
+                    <p id="errorsSummary" class="errors-text"></p>
+                    <input class="form-button-submit" type="submit" value="Zapisz">
+                    <a href="../Release/graNaWyd-list.html" class="form-button-cancel">Anuluj</a>   
+                </div> 
+                <p><b></b><b></b></p>
+            </form>
+            
+            
+        </main>
+        <%- include('../../fragments/footer.ejs') %>

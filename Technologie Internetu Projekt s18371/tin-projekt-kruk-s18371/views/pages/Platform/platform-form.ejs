@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <script type="application/javascript" src="/js/validationCommon.js"></script>
+    <script type="application/javascript" src="/js/validationPlatformFrom.js"></script>
+    <link rel="stylesheet" href="../../css/platform/styleForm.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Baza Gier</title>
+</head>
+    <body >
+      
+        <header>
+            <h1 >Baza Gier CFA</h1>
+            <img src="../../img/logo.png" alt="Baza Gier CFA Logo">
+        </header>
+        <nav >
+            <ul>
+                <li><a href="/">Strona główna</a></li>
+                <li><a href="/game">Gry</a></li>
+                <li><a href="/platform" class="active">Platformy</a></li>
+                <li><a href="/release">Gry na platformy</a></li>
+            </ul>
+        </nav>
+        <main>
+            <script type="application/javascript" src="/js/validationPlatformFrom.js"></script>
+            <h2><%= pageTitle %></h2>
+            <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm()">
+                    <input type="hidden" name="idPlatformy" value="<%= platform.idPlatformy %>">
+                <!--<div class="form-group">-->
+                    <label for="nazwa">Nazwa:<abbr title="required" aria-label="required">*</abbr></label>
+
+                    <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                    
+                        <input class="<%= validationErrors.find(e => e.path.includes('nazwa')) ? 'error-input' : '' %>" type="text" name="nazwa" id="name" placeholder="2-60 znaków" value="<%= platformData.nazwa %>"
+                        <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                        <% } else{ %>  
+                        <input type="text" name="nazwa" id="name" placeholder="2-60 znaków" value="<%= platform.name %>"
+                        <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                    <% } %>
+
+
+        
+            
+                    <span id="errorName" class="errors-text">
+                        <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                            <% if (validationErrors.find(e => e.path.includes('nazwa'))) { %>
+                                <%= validationErrors.find(e => e.path.includes('nazwa')).message %>
+                            <% } %>
+                        <% } %>
+                    </span>
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <label for="producent">Producent:<abbr title="required" aria-label="required">*</abbr></label>
+
+                    <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                    
+                        <input class="<%= validationErrors.find(e => e.path.includes('producent')) ? 'error-input' : '' %>" type="text" name="producent" id="producer" placeholder="2-60 znaków" value="<%= platformData.producent %>"
+                        <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                        <% } else{ %>  
+                        <input type="text" name="producent" id="producer" placeholder="2-60 znaków" value="<%= platform.producer %>"
+                        <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+                    <% } %>
+
+
+              
+                    <span id="errorProducer" class="errors-text">
+                        <% if (!(Object.keys(validationErrors).length === 0)) { %>
+                            <% if (validationErrors.find(e => e.path.includes('producent'))) { %>
+                                <%= validationErrors.find(e => e.path.includes('producent')).message %>
+                            <% } %>
+                        <% } %>
+                    </span>
+                <!--</div>-->
+                <div class="form-buttons">
+                    <% if (formMode == 'showDetails') { %>
+                        <div class="section-buttons">
+                            <a href="/platform/edit/<%= platform.idPlatformy %>" class="form-button-submit">Edytuj</a>
+                        </div>
+                        <% } %>
+                    <p id="errorsSummary" class="errors-text"></p>
+                    <% if (formMode != 'showDetails') { %>
+                        <input class="form-button-submit" type="submit" value="<%=btnLabel%>" />
+                        <a class="form-button-cancel" href="/platform">Anuluj</a>
+                    <% } else { %>
+                        <a class="form-button-cancel" href="/platform">Powrót</a>
+                    <% } %>
+                </div> 
+            </form>
+            <p><b></b></p>
+            <% if (formMode == 'showDetails' || formMode == 'edit') { %>
+                <h2>
+                    Szczegóły wydania
+                </h2>
+                <table class="table-list">
+                    <thead>
+                    <tr>
+                        <th>Gra</th>
+                        <th>Cena</th>
+                        <th>Data wydania</th>
+                        <th>Wersja</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <% for (let e of platform.releases) { %>
+                            <tr>
+                                <td><a href="/game/details/<%= e.gra.idGry %>"><%= e.gra.nazwa %></a></td>
+                                <td><%= e.price %></td>
+                                <td><%= e.releaseDate.toISOString().split('T')[0] %></td>
+                                <td><%= e.version %></td>
+                            </tr> 
+                        <% } %>
+                    </tbody>
+                </table>
+                <p><b></b></p>
+            <% } %>
+            <p><b></b></p>
+        </main>
+    
+        <%- include('../../fragments/footer.ejs') %>
